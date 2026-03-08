@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — ForgeSync</title>
+  <meta name="description" content="A collection of tools, apps, and experiments built for the web.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,600;12..96,800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg:               #0c0b0a;
+      --card-bg:          #141310;
+      --card-border:      #232019;
+      --card-hover-border:#c98b1a;
+      --text-primary:     #ede8df;
+      --text-secondary:   #7a7470;
+      --text-muted:       #38342e;
+      --accent:           #c98b1a;
+      --accent-glow:      rgba(201, 139, 26, 0.08);
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-primary);
+      font-family: 'Bricolage Grotesque', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Dot-grid background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(circle, #28241e 1px, transparent 1px);
+      background-size: 28px 28px;
+      opacity: 0.5;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Top accent line */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent 0%, var(--accent) 30%, var(--accent) 70%, transparent 100%);
+      z-index: 10;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 40px 100px;
+    }
+
+    /* ── Header ── */
+    .header {
+      margin-bottom: 72px;
+    }
+
+    .header-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease 0.05s forwards;
+    }
+
+    .header-title {
+      font-size: clamp(3.5rem, 8vw, 6.5rem);
+      font-weight: 800;
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease 0.1s forwards;
+    }
+
+    .header-title .dim {
+      color: var(--text-muted);
+    }
+
+    .header-rule {
+      width: 40px;
+      height: 2px;
+      background: var(--accent);
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease 0.15s forwards;
+    }
+
+    .header-desc {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      max-width: 380px;
+      line-height: 1.65;
+      opacity: 0;
+      animation: fadeUp 0.5s ease 0.2s forwards;
+    }
+
+    /* ── Grid ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    /* ── Card ── */
+    .card {
+      position: relative;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.55s ease forwards;
+      transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .card:nth-child(1) { animation-delay: 0.25s; }
+    .card:nth-child(2) { animation-delay: 0.32s; }
+    .card:nth-child(3) { animation-delay: 0.39s; }
+    .card:nth-child(4) { animation-delay: 0.46s; }
+    .card:nth-child(5) { animation-delay: 0.53s; }
+
+    .card:hover {
+      border-color: var(--card-hover-border);
+      transform: translateY(-5px);
+      box-shadow:
+        0 20px 48px rgba(0, 0, 0, 0.55),
+        0 0 0 1px rgba(201, 139, 26, 0.08),
+        inset 0 1px 0 rgba(201, 139, 26, 0.06);
+    }
+
+    /* ── Thumbnail ── */
+    .card-thumb {
+      aspect-ratio: 16 / 10;
+      background: #181510;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Shimmer on load */
+    .card-thumb::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        90deg,
+        transparent 20%,
+        rgba(255, 255, 255, 0.025) 50%,
+        transparent 80%
+      );
+      background-size: 200% 100%;
+      animation: shimmer 1.8s ease infinite;
+      z-index: 1;
+    }
+
+    .card-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.88) saturate(0.9);
+      transition: transform 0.5s ease, filter 0.3s ease;
+    }
+
+    .card:hover .card-thumb img {
+      transform: scale(1.05);
+      filter: brightness(1) saturate(1);
+    }
+
+    /* Bottom edge fade on thumbnail */
+    .card-thumb::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 32px;
+      background: linear-gradient(to bottom, transparent, var(--card-bg));
+      z-index: 2;
+    }
+
+    /* ── Card body ── */
+    .card-body {
+      padding: 18px 22px 22px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .card-number {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      margin-bottom: 9px;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+
+    .card-desc {
+      font-size: 0.84rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 18px;
+    }
+
+    .card-url {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      letter-spacing: 0.01em;
+      transition: color 0.2s ease;
+    }
+
+    .card:hover .card-url {
+      color: var(--accent);
+    }
+
+    .card-url-arrow {
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover .card-url-arrow {
+      transform: translate(3px, -1px);
+    }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: 80px;
+      padding-top: 28px;
+      border-top: 1px solid var(--card-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      opacity: 0;
+      animation: fadeUp 0.5s ease 0.7s forwards;
+    }
+
+    .footer-brand {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+    }
+
+    .footer-count {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 300;
+      color: var(--text-muted);
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes shimmer {
+      0%   { background-position: -200% 0; }
+      100% { background-position:  200% 0; }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 960px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 580px) {
+      .container {
+        padding: 60px 20px 80px;
+      }
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .header {
+        margin-bottom: 52px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <header class="header">
+      <p class="header-eyebrow">forgesync.co.nz</p>
+      <h1 class="header-title">
+        PROJ<span class="dim">—</span><br>ECTS
+      </h1>
+      <div class="header-rule"></div>
+      <p class="header-desc">A collection of tools, apps, and experiments built for the web.</p>
+    </header>
+
+    <main class="grid">
+
+      <a class="card" href="https://isthatabird.forgesync.co.nz/" target="_blank" rel="noopener noreferrer">
+        <div class="card-thumb">
+          <img
+            src="https://image.thum.io/get/width/1280/crop/800/https://isthatabird.forgesync.co.nz/"
+            alt="Up in the Air – satellite and flight tracker"
+            loading="lazy"
+          >
+        </div>
+        <div class="card-body">
+          <span class="card-number">01</span>
+          <h2 class="card-title">Up in the Air</h2>
+          <p class="card-desc">Real-time satellite and flight tracker. See what's flying above your location right now — from commercial flights to orbiting spacecraft.</p>
+          <div class="card-url">
+            <span>isthatabird.forgesync.co.nz</span>
+            <span class="card-url-arrow">↗</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="card" href="https://weathertempo.forgesync.co.nz/" target="_blank" rel="noopener noreferrer">
+        <div class="card-thumb">
+          <img
+            src="https://image.thum.io/get/width/1280/crop/800/https://weathertempo.forgesync.co.nz/"
+            alt="WeatherTempo – live weather dashboard"
+            loading="lazy"
+          >
+        </div>
+        <div class="card-body">
+          <span class="card-number">02</span>
+          <h2 class="card-title">WeatherTempo</h2>
+          <p class="card-desc">Live weather dashboard with current conditions, tide times, UV index, moon phase, and a multi-day forecast.</p>
+          <div class="card-url">
+            <span>weathertempo.forgesync.co.nz</span>
+            <span class="card-url-arrow">↗</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="card" href="https://timezone.forgesync.co.nz/" target="_blank" rel="noopener noreferrer">
+        <div class="card-thumb">
+          <img
+            src="https://image.thum.io/get/width/1280/crop/800/https://timezone.forgesync.co.nz/"
+            alt="Time Zone Overlap Checker"
+            loading="lazy"
+          >
+        </div>
+        <div class="card-body">
+          <span class="card-number">03</span>
+          <h2 class="card-title">Time Zone Overlap</h2>
+          <p class="card-desc">Find the working-hours overlap between two time zones. Useful for scheduling meetings across the globe without the mental arithmetic.</p>
+          <div class="card-url">
+            <span>timezone.forgesync.co.nz</span>
+            <span class="card-url-arrow">↗</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="card" href="https://netball.forgesync.co.nz/" target="_blank" rel="noopener noreferrer">
+        <div class="card-thumb">
+          <img
+            src="https://image.thum.io/get/width/1280/crop/800/https://netball.forgesync.co.nz/"
+            alt="CourtTime – netball court time tracker"
+            loading="lazy"
+          >
+        </div>
+        <div class="card-body">
+          <span class="card-number">04</span>
+          <h2 class="card-title">CourtTime</h2>
+          <p class="card-desc">Netball court-time tracker for coaches. Manage rosters, plan substitutions per quarter, and ensure every player gets fair time on court.</p>
+          <div class="card-url">
+            <span>netball.forgesync.co.nz</span>
+            <span class="card-url-arrow">↗</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="card" href="https://unlink.forgesync.co.nz/" target="_blank" rel="noopener noreferrer">
+        <div class="card-thumb">
+          <img
+            src="https://image.thum.io/get/width/1280/crop/800/https://unlink.forgesync.co.nz/"
+            alt="LinkSanitizer – strip tracking parameters from URLs"
+            loading="lazy"
+          >
+        </div>
+        <div class="card-body">
+          <span class="card-number">05</span>
+          <h2 class="card-title">LinkSanitizer</h2>
+          <p class="card-desc">Strip tracking parameters from any URL instantly. Paste a link full of <code style="font-family:inherit;color:var(--accent)">utm_</code> noise and get a clean, shareable version.</p>
+          <div class="card-url">
+            <span>unlink.forgesync.co.nz</span>
+            <span class="card-url-arrow">↗</span>
+          </div>
+        </div>
+      </a>
+
+    </main>
+
+    <footer class="footer">
+      <span class="footer-brand">forgesync.co.nz</span>
+      <span class="footer-count">5 projects</span>
+    </footer>
+
+  </div>
+</body>
+</html>
