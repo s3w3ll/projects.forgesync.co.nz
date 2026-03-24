@@ -47,9 +47,9 @@
     }
     .nav-logo {
       font-family: var(--mono);
-      font-size: 13px;
+      font-size: 20px;
       letter-spacing: 0.08em;
-      color: var(--muted);
+      color: var(--text);
       text-decoration: none;
     }
     .nav-logo span { color: var(--accent); }
@@ -61,6 +61,17 @@
       transition: color 0.2s;
     }
     nav a:hover { color: var(--text); }
+    .nav-cta {
+      color: var(--bg);
+      background: var(--accent);
+      padding: 0.45rem 1rem;
+      border-radius: 2px;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      font-weight: 500;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-cta:hover { background: var(--accent-dim); color: var(--bg); }
 
     /* HERO */
     .hero {
@@ -323,7 +334,7 @@
 
   <nav>
     <a class="nav-logo" href="https://forgesync.co.nz">Forge<span>Sync</span></a>
-    <a href="./index.html">Projects ↗</a>
+    <a class="nav-cta" href="./index.html">Projects ↗</a>
   </nav>
 
   <!-- HERO -->
