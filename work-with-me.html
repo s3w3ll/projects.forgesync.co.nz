@@ -36,7 +36,6 @@
     /* NAV */
     nav {
       display: flex;
-      justify-content: space-between;
       align-items: center;
       padding: 1.5rem 2.5rem;
       border-bottom: 1px solid var(--border);
@@ -44,6 +43,11 @@
       top: 0;
       background: var(--bg);
       z-index: 100;
+    }
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
     }
     .nav-logo {
       font-family: var(--mono);
@@ -333,8 +337,10 @@
 <body>
 
   <nav>
-    <a class="nav-logo" href="https://forgesync.co.nz">Forge<span>Sync</span></a>
-    <a class="nav-cta" href="./index.html">Projects ↗</a>
+    <div class="nav-left">
+      <a class="nav-logo" href="https://forgesync.co.nz">Forge<span>Sync</span></a>
+      <a class="nav-cta" href="./index.html">Projects ↗</a>
+    </div>
   </nav>
 
   <!-- HERO -->

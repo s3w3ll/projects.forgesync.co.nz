@@ -37,7 +37,6 @@
     /* NAV */
     nav {
       display: flex;
-      justify-content: space-between;
       align-items: center;
       padding: 1.5rem 2.5rem;
       border-bottom: 1px solid var(--border);
@@ -45,6 +44,11 @@
       top: 0;
       background: var(--bg);
       z-index: 100;
+    }
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
     }
     .nav-logo {
       font-family: var(--mono);
@@ -170,6 +174,34 @@
       letter-spacing: 0.06em;
     }
     .proof-link:hover { text-decoration: underline; }
+    .project-thumb {
+      width: calc(100% + 5rem);
+      margin: -2.5rem -2.5rem 2rem;
+      height: 180px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .project-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(0.8);
+      transition: filter 0.3s;
+    }
+    .project-card:hover .project-thumb img { filter: saturate(1); }
+    .project-thumb-placeholder {
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        45deg,
+        var(--surface),
+        var(--surface) 8px,
+        var(--border) 8px,
+        var(--border) 9px
+      );
+      opacity: 0.5;
+    }
 
     /* FOOTER */
     footer {
@@ -207,8 +239,10 @@
 <body>
 
   <nav>
-    <a class="nav-logo" href="https://forgesync.co.nz">Forge<span>Sync</span></a>
-    <a class="nav-cta" href="./work-with-me.html">Work with me ↗</a>
+    <div class="nav-left">
+      <a class="nav-logo" href="https://forgesync.co.nz">Forge<span>Sync</span></a>
+      <a class="nav-cta" href="./work-with-me.html">Work with me ↗</a>
+    </div>
   </nav>
 
   <section class="hero">
@@ -226,6 +260,7 @@
     <div class="projects-grid">
 
       <div class="project-card">
+        <div class="project-thumb"><img src="./thumbnails/weathertempo.jpg" alt="WeatherTempo" /></div>
         <p class="project-num">01</p>
         <h3>WeatherTempo</h3>
         <p>Live weather dashboard with current conditions, tide times, UV index, moon phase, and a multi-day forecast.</p>
@@ -233,6 +268,7 @@
       </div>
 
       <div class="project-card">
+        <div class="project-thumb"><img src="./thumbnails/timezone.jpg" alt="Time Zone Overlap" /></div>
         <p class="project-num">02</p>
         <h3>Time Zone Overlap</h3>
         <p>Find the working-hours overlap between two time zones. Useful for scheduling meetings across the globe without the mental arithmetic.</p>
@@ -240,6 +276,7 @@
       </div>
 
       <div class="project-card">
+        <div class="project-thumb"><img src="./thumbnails/netball.jpg" alt="CourtTime" /></div>
         <p class="project-num">03</p>
         <h3>CourtTime</h3>
         <p>Netball court-time tracker for coaches. Manage rosters, plan substitutions per quarter, and ensure every player gets fair time on court.</p>
@@ -247,6 +284,7 @@
       </div>
 
       <div class="project-card">
+        <div class="project-thumb"><img src="./thumbnails/unlink.jpg" alt="LinkSanitizer" /></div>
         <p class="project-num">04</p>
         <h3>LinkSanitizer</h3>
         <p>Strip tracking parameters from any URL instantly. Paste a link full of utm_ noise and get a clean, shareable version.</p>
@@ -254,6 +292,7 @@
       </div>
 
       <div class="project-card">
+        <div class="project-thumb"><img src="./thumbnails/isthatabird.jpg" alt="Up in the Air" /></div>
         <p class="project-num">05</p>
         <h3>Up in the Air</h3>
         <p>Real-time satellite and flight tracker. See what's flying above your location right now — from commercial flights to orbiting spacecraft.</p>
@@ -261,6 +300,7 @@
       </div>
 
       <div class="project-card">
+        <div class="project-thumb"><img src="./thumbnails/sun.jpg" alt="SunSmart UV" /></div>
         <p class="project-num">06</p>
         <h3>SunSmart UV</h3>
         <p>UV monitoring tool for schools with SunSmart policies. Tracks UV levels through the day and surfaces required actions by policy type.</p>
