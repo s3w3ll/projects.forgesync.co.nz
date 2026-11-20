@@ -4,316 +4,158 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projects — ForgeSync</title>
-  <meta name="description" content="A collection of tools, apps, and experiments built for the web." />
+  <meta name="description" content="Six web tools built and shipped by ForgeSync — weather, tides, UV, time zones, netball court time and flight tracking. Each one built for a specific job." />
+
+  <link rel="icon" href="./brand/forgesync-icon.svg" type="image/svg+xml" />
+  <meta name="theme-color" content="#15181C" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#22272D" media="(prefers-color-scheme: dark)" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./brand/forgesync.css" />
+
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    /* Page layout — projects */
 
-    :root {
-      --bg:         #0e0e0e;
-      --surface:    #161616;
-      --border:     #2a2a2a;
-      --text:       #e8e4dc;
-      --muted:      #7a7670;
-      --accent:     #c8f560;
-      --accent-dim: #9bba3f;
-      --mono:       'DM Mono', monospace;
-      --serif:      'Fraunces', serif;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--mono);
-      font-size: 14px;
-      line-height: 1.7;
-      min-height: 100vh;
-    }
-
-    /* NAV */
-    nav {
-      display: flex;
-      align-items: center;
-      padding: 1.5rem 2.5rem;
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      background: var(--bg);
-      z-index: 100;
-    }
-    .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-    }
-    .nav-logo {
-      font-family: var(--mono);
-      font-size: 20px;
-      letter-spacing: 0.08em;
-      color: var(--text);
-      text-decoration: none;
-    }
-    .nav-logo span { color: var(--accent); }
-    nav a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 12px;
-      letter-spacing: 0.06em;
-      transition: color 0.2s;
-    }
-    nav a:hover { color: var(--text); }
-    .nav-cta {
-      color: var(--bg);
-      background: var(--accent);
-      padding: 0.45rem 1rem;
-      border-radius: 2px;
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      font-weight: 500;
-      transition: background 0.2s, color 0.2s;
-    }
-    .nav-cta:hover { background: var(--accent-dim); color: var(--bg); }
-
-    /* HERO */
-    .hero {
-      padding: 1.5rem 2.5rem 1rem;
-      max-width: 900px;
-    }
-    .hero-label {
-      font-size: 11px;
-      letter-spacing: 0.15em;
-      color: var(--accent);
-      text-transform: uppercase;
-      margin-bottom: 2rem;
-    }
-    .hero h1 {
-      font-family: var(--serif);
-      font-size: clamp(3rem, 7vw, 6rem);
-      font-weight: 300;
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-      color: var(--text);
-      margin-bottom: 2rem;
-    }
-    .hero h1 em {
-      font-style: italic;
-      color: var(--accent);
-    }
-    .hero-body {
-      font-size: 15px;
-      color: var(--muted);
-      max-width: 560px;
-      line-height: 1.8;
-    }
-
-    /* DIVIDER */
-    .divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 0 2.5rem;
-    }
-
-    /* PROJECTS SECTION */
-    .section {
-      padding: 1.25rem 2.5rem;
-      max-width: 1100px;
-    }
-    .section-label {
-      font-size: 11px;
-      letter-spacing: 0.15em;
-      color: var(--accent);
-      text-transform: uppercase;
-      margin-bottom: 3rem;
-    }
-
-    /* BORDER GRID */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1px;
-      border: 1px solid var(--border);
+      gap: var(--space-4);
     }
+
     .project-card {
-      padding: 2.5rem;
-      background: var(--surface);
-      transition: background 0.2s;
-      display: flex;
-      flex-direction: column;
-    }
-    .project-card:hover { background: #1c1c1c; }
-    .project-num {
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.1em;
-      margin-bottom: 1.5rem;
-    }
-    .project-card h3 {
-      font-family: var(--serif);
-      font-weight: 300;
-      font-size: 1.4rem;
-      line-height: 1.2;
-      margin-bottom: 1rem;
-      color: var(--text);
-    }
-    .project-card p {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.75;
-      flex: 1;
-    }
-    .proof-link {
-      display: inline-block;
-      margin-top: 1.5rem;
-      font-size: 11px;
-      color: var(--accent);
-      text-decoration: none;
-      letter-spacing: 0.06em;
-    }
-    .proof-link:hover { text-decoration: underline; }
-    .project-thumb {
-      width: calc(100% + 5rem);
-      margin: -2.5rem -2.5rem 2rem;
-      height: 180px;
+      display: flex; flex-direction: column;
       overflow: hidden;
-      flex-shrink: 0;
+      text-decoration: none;
+      color: inherit;
     }
-    .project-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      filter: saturate(0.8);
-      transition: filter 0.3s;
+    .project-thumb {
+      margin: calc(var(--space-6) * -1) calc(var(--space-6) * -1) var(--space-6);
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: var(--surface-sunken);
+      border-bottom: 1px solid var(--line-strong);
     }
-    .project-card:hover .project-thumb img { filter: saturate(1); }
-    .project-thumb-placeholder {
-      width: 100%;
-      height: 100%;
-      background: repeating-linear-gradient(
-        45deg,
-        var(--surface),
-        var(--surface) 8px,
-        var(--border) 8px,
-        var(--border) 9px
-      );
-      opacity: 0.5;
+    .project-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .project-card .fs-card-body { flex: 1; }
+    .project-link {
+      margin-top: var(--space-4);
+      font-size: 13px; line-height: 18px; font-weight: 500;
+      color: var(--ember-text);
+      word-break: break-word;
     }
-
-    /* FOOTER */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2rem 2.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.06em;
-    }
-    footer a { color: var(--muted); text-decoration: none; }
-    footer a:hover { color: var(--text); }
-
-    /* ANIMATIONS */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .hero-label { animation: fadeUp 0.5s ease both; }
-    .hero h1    { animation: fadeUp 0.6s ease 0.1s both; }
-    .hero-body  { animation: fadeUp 0.6s ease 0.2s both; }
-
-    /* RESPONSIVE */
-    @media (max-width: 680px) {
-      nav { padding: 1.25rem 1.5rem; }
-      .hero { padding: 1rem 1.5rem 0.75rem; }
-      .divider { margin: 0 1.5rem; }
-      .section { padding: 0.875rem 1.5rem; }
-      footer { padding: 1.5rem; }
-    }
+    .project-card:hover .project-link { text-decoration: underline; }
   </style>
 </head>
 <body>
 
-  <nav>
-    <div class="nav-left">
-      <a class="nav-logo" href="https://forgesync.co.nz">Forge<span>Sync</span></a>
-      <a class="nav-cta" href="./work-with-me.html">Work with me ↗</a>
+  <div id="top-sentinel" aria-hidden="true"></div>
+
+  <header class="fs-header">
+    <a class="fs-header-home" href="https://forgesync.co.nz">
+      <span class="fs-logo fs-logo-on-dark">
+        <img class="fs-mark" src="./brand/forgesync-mark-on-dark.svg" width="28" height="28" alt="" />
+        <span class="fs-wordmark" style="font-size: 22px;"><span class="fs-forge">Forge</span><span class="fs-sync">Sync</span></span>
+      </span>
+    </a>
+    <nav aria-label="Main">
+      <ul class="fs-nav">
+        <li><a class="fs-nav-link" href="./index.html" aria-current="page">Projects</a></li>
+        <li><a class="fs-nav-link" href="./work-with-me.html">Work with us</a></li>
+      </ul>
+    </nav>
+    <div class="fs-header-end">
+      <a class="fs-btn fs-btn-sm fs-btn-primary" href="mailto:contact@forgesync.co.nz">Get in touch</a>
     </div>
-  </nav>
+  </header>
 
-  <section class="hero">
-    <p class="hero-label">forgesync.co.nz</p>
-    <h1>Solutions<br><em>Looking for Problems</em></h1>
-    <p class="hero-body">
-      A collection of tools, apps, and experiments — each one built for a specific job and shipped to the web.
-    </p>
-  </section>
+  <main>
+    <section class="hero">
+      <p class="fs-eyebrow">Shipped work</p>
+      <h1>Six tools,<br /><em>built and shipped</em></h1>
+      <p class="hero-body">
+        Each one was built for a specific job — a coach picking substitutions, a school checking UV, someone working out when two offices are both awake. All six run in a browser. Here is what each does and where it lives.
+      </p>
+    </section>
 
-  <hr class="divider" />
+    <section class="section" aria-labelledby="projects-heading">
+      <h2 class="fs-eyebrow" id="projects-heading">Projects</h2>
+      <div class="projects-grid">
 
-  <section class="section">
-    <p class="section-label">Projects</p>
-    <div class="projects-grid">
+        <a class="fs-card fs-card-interactive project-card" href="https://weathertempo.forgesync.co.nz/" target="_blank" rel="noopener noreferrer">
+          <div class="project-thumb"><img src="./thumbnails/weathertempo.jpg" alt="" /></div>
+          <p class="fs-eyebrow" aria-hidden="true">01</p>
+          <h3 class="fs-card-title">WeatherTempo</h3>
+          <p class="fs-card-body">Current conditions, tide times, UV index, moon phase and a multi-day forecast on one screen. Built for checking the day at a glance.</p>
+          <span class="project-link">weathertempo.forgesync.co.nz ↗</span>
+        </a>
 
-      <div class="project-card">
-        <div class="project-thumb"><img src="./thumbnails/weathertempo.jpg" alt="WeatherTempo" /></div>
-        <p class="project-num">01</p>
-        <h3>WeatherTempo</h3>
-        <p>Live weather dashboard with current conditions, tide times, UV index, moon phase, and a multi-day forecast.</p>
-        <a class="proof-link" href="https://weathertempo.forgesync.co.nz/" target="_blank" rel="noopener noreferrer">weathertempo.forgesync.co.nz ↗</a>
+        <a class="fs-card fs-card-interactive project-card" href="https://timezone.forgesync.co.nz/" target="_blank" rel="noopener noreferrer">
+          <div class="project-thumb"><img src="./thumbnails/timezone.jpg" alt="" /></div>
+          <p class="fs-eyebrow" aria-hidden="true">02</p>
+          <h3 class="fs-card-title">Time Zone Overlap</h3>
+          <p class="fs-card-body">Pick two time zones and see where the working hours overlap. Saves doing the arithmetic before booking a call.</p>
+          <span class="project-link">timezone.forgesync.co.nz ↗</span>
+        </a>
+
+        <a class="fs-card fs-card-interactive project-card" href="https://netball.forgesync.co.nz/" target="_blank" rel="noopener noreferrer">
+          <div class="project-thumb"><img src="./thumbnails/netball.jpg" alt="" /></div>
+          <p class="fs-eyebrow" aria-hidden="true">03</p>
+          <h3 class="fs-card-title">CourtTime</h3>
+          <p class="fs-card-body">Netball court-time tracker for coaches. Set the roster, plan substitutions by quarter, and see who is short of court time.</p>
+          <span class="project-link">netball.forgesync.co.nz ↗</span>
+        </a>
+
+        <a class="fs-card fs-card-interactive project-card" href="https://unlink.forgesync.co.nz/" target="_blank" rel="noopener noreferrer">
+          <div class="project-thumb"><img src="./thumbnails/unlink.jpg" alt="" /></div>
+          <p class="fs-eyebrow" aria-hidden="true">04</p>
+          <h3 class="fs-card-title">LinkSanitizer</h3>
+          <p class="fs-card-body">Paste a link, get it back with the tracking parameters stripped. Turns a URL full of utm_ noise into something worth sharing.</p>
+          <span class="project-link">unlink.forgesync.co.nz ↗</span>
+        </a>
+
+        <a class="fs-card fs-card-interactive project-card" href="https://isthatabird.forgesync.co.nz/" target="_blank" rel="noopener noreferrer">
+          <div class="project-thumb"><img src="./thumbnails/isthatabird.jpg" alt="" /></div>
+          <p class="fs-eyebrow" aria-hidden="true">05</p>
+          <h3 class="fs-card-title">Up in the Air</h3>
+          <p class="fs-card-body">Real-time tracker for aircraft and satellites overhead. Shows what is above your location right now, from airliners to spacecraft.</p>
+          <span class="project-link">isthatabird.forgesync.co.nz ↗</span>
+        </a>
+
+        <a class="fs-card fs-card-interactive project-card" href="https://sun.forgesync.co.nz/" target="_blank" rel="noopener noreferrer">
+          <div class="project-thumb"><img src="./thumbnails/sun.jpg" alt="" /></div>
+          <p class="fs-eyebrow" aria-hidden="true">06</p>
+          <h3 class="fs-card-title">SunSmart UV</h3>
+          <p class="fs-card-body">UV monitoring for schools running a SunSmart policy. Tracks UV through the day and shows the action the policy requires.</p>
+          <span class="project-link">sun.forgesync.co.nz ↗</span>
+        </a>
+
       </div>
+    </section>
+  </main>
 
-      <div class="project-card">
-        <div class="project-thumb"><img src="./thumbnails/timezone.jpg" alt="Time Zone Overlap" /></div>
-        <p class="project-num">02</p>
-        <h3>Time Zone Overlap</h3>
-        <p>Find the working-hours overlap between two time zones. Useful for scheduling meetings across the globe without the mental arithmetic.</p>
-        <a class="proof-link" href="https://timezone.forgesync.co.nz/" target="_blank" rel="noopener noreferrer">timezone.forgesync.co.nz ↗</a>
-      </div>
-
-      <div class="project-card">
-        <div class="project-thumb"><img src="./thumbnails/netball.jpg" alt="CourtTime" /></div>
-        <p class="project-num">03</p>
-        <h3>CourtTime</h3>
-        <p>Netball court-time tracker for coaches. Manage rosters, plan substitutions per quarter, and ensure every player gets fair time on court.</p>
-        <a class="proof-link" href="https://netball.forgesync.co.nz/" target="_blank" rel="noopener noreferrer">netball.forgesync.co.nz ↗</a>
-      </div>
-
-      <div class="project-card">
-        <div class="project-thumb"><img src="./thumbnails/unlink.jpg" alt="LinkSanitizer" /></div>
-        <p class="project-num">04</p>
-        <h3>LinkSanitizer</h3>
-        <p>Strip tracking parameters from any URL instantly. Paste a link full of utm_ noise and get a clean, shareable version.</p>
-        <a class="proof-link" href="https://unlink.forgesync.co.nz/" target="_blank" rel="noopener noreferrer">unlink.forgesync.co.nz ↗</a>
-      </div>
-
-      <div class="project-card">
-        <div class="project-thumb"><img src="./thumbnails/isthatabird.jpg" alt="Up in the Air" /></div>
-        <p class="project-num">05</p>
-        <h3>Up in the Air</h3>
-        <p>Real-time satellite and flight tracker. See what's flying above your location right now — from commercial flights to orbiting spacecraft.</p>
-        <a class="proof-link" href="https://isthatabird.forgesync.co.nz/" target="_blank" rel="noopener noreferrer">isthatabird.forgesync.co.nz ↗</a>
-      </div>
-
-      <div class="project-card">
-        <div class="project-thumb"><img src="./thumbnails/sun.jpg" alt="SunSmart UV" /></div>
-        <p class="project-num">06</p>
-        <h3>SunSmart UV</h3>
-        <p>UV monitoring tool for schools with SunSmart policies. Tracks UV levels through the day and surfaces required actions by policy type.</p>
-        <a class="proof-link" href="https://sun.forgesync.co.nz/" target="_blank" rel="noopener noreferrer">sun.forgesync.co.nz ↗</a>
-      </div>
-
+  <footer class="site-footer">
+    <span class="fs-logo fs-logo-on-dark">
+      <span class="fs-wordmark" style="font-size: 20px;"><span class="fs-forge">Forge</span><span class="fs-sync">Sync</span></span>
+    </span>
+    <div class="footer-links">
+      <a href="./work-with-me.html">Work with us</a>
+      <a href="https://forgesync.co.nz">forgesync.co.nz ↗</a>
     </div>
-  </section>
-
-  <footer>
-    <span>ForgeSync</span>
-    <a href="./work-with-me.html">Work with me ↗</a>
   </footer>
+
+  <script>
+    // shadow-md on the sticky header once scrolled, per the elevation rules.
+    (function () {
+      var sentinel = document.getElementById('top-sentinel');
+      var header = document.querySelector('.fs-header');
+      if (!sentinel || !header || !('IntersectionObserver' in window)) return;
+      new IntersectionObserver(function (entries) {
+        header.classList.toggle('is-scrolled', !entries[0].isIntersecting);
+      }).observe(sentinel);
+    })();
+  </script>
 
 </body>
 </html>

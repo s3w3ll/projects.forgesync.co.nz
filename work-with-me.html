@@ -3,476 +3,276 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Work With Me — ForgeSync</title>
+  <title>Work with us — ForgeSync</title>
+  <meta name="description" content="ForgeSync builds automation, integrations and custom web tools, and writes the documentation that goes with them. Written scope before any work starts." />
+
+  <link rel="icon" href="./brand/forgesync-icon.svg" type="image/svg+xml" />
+  <meta name="theme-color" content="#15181C" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#22272D" media="(prefers-color-scheme: dark)" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./brand/forgesync.css" />
+
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    /* Page layout — work with us */
 
-    :root {
-      --bg:         #0e0e0e;
-      --surface:    #161616;
-      --border:     #2a2a2a;
-      --text:       #e8e4dc;
-      --muted:      #7a7670;
-      --accent:     #c8f560;
-      --accent-dim: #9bba3f;
-      --mono:       'DM Mono', monospace;
-      --serif:      'Fraunces', serif;
-    }
+    .hero-body { margin-bottom: var(--space-6); }
 
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--mono);
-      font-size: 14px;
-      line-height: 1.7;
-      min-height: 100vh;
-    }
-
-    /* NAV */
-    nav {
-      display: flex;
-      align-items: center;
-      padding: 1.5rem 2.5rem;
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      background: var(--bg);
-      z-index: 100;
-    }
-    .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-    }
-    .nav-logo {
-      font-family: var(--mono);
-      font-size: 20px;
-      letter-spacing: 0.08em;
-      color: var(--text);
-      text-decoration: none;
-    }
-    .nav-logo span { color: var(--accent); }
-    nav a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 12px;
-      letter-spacing: 0.06em;
-      transition: color 0.2s;
-    }
-    nav a:hover { color: var(--text); }
-    .nav-cta {
-      color: var(--bg);
-      background: var(--accent);
-      padding: 0.45rem 1rem;
-      border-radius: 2px;
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      font-weight: 500;
-      transition: background 0.2s, color 0.2s;
-    }
-    .nav-cta:hover { background: var(--accent-dim); color: var(--bg); }
-
-    /* HERO */
-    .hero {
-      padding: 6rem 2.5rem 4rem;
-      max-width: 900px;
-    }
-    .hero-label {
-      font-size: 11px;
-      letter-spacing: 0.15em;
-      color: var(--accent);
-      text-transform: uppercase;
-      margin-bottom: 2rem;
-    }
-    .hero h1 {
-      font-family: var(--serif);
-      font-size: clamp(3rem, 7vw, 6rem);
-      font-weight: 300;
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-      color: var(--text);
-      margin-bottom: 2rem;
-    }
-    .hero h1 em {
-      font-style: italic;
-      color: var(--accent);
-    }
-    .hero-body {
-      font-size: 15px;
-      color: var(--muted);
-      max-width: 560px;
-      line-height: 1.8;
-      margin-bottom: 2.5rem;
-    }
-    .hero-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--accent);
-      color: #0e0e0e;
-      padding: 0.8rem 1.6rem;
-      font-family: var(--mono);
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      text-decoration: none;
-      font-weight: 500;
-      transition: background 0.2s, gap 0.2s;
-    }
-    .hero-cta:hover { background: var(--accent-dim); gap: 0.9rem; }
-
-    /* DIVIDER */
-    .divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 0 2.5rem;
-    }
-
-    /* SERVICES */
-    .section {
-      padding: 5rem 2.5rem;
-      max-width: 1100px;
-    }
-    .section-label {
-      font-size: 11px;
-      letter-spacing: 0.15em;
-      color: var(--accent);
-      text-transform: uppercase;
-      margin-bottom: 3rem;
-    }
-
+    /* What we do */
     .services-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1px;
-      border: 1px solid var(--border);
+      gap: var(--space-4);
     }
-    .service-card {
-      padding: 2.5rem;
-      border-right: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      background: var(--surface);
-      transition: background 0.2s;
-      position: relative;
-      overflow: hidden;
-    }
-    .service-card:hover { background: #1c1c1c; }
-    .service-num {
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.1em;
-      margin-bottom: 1.5rem;
-    }
-    .service-card h3 {
-      font-family: var(--serif);
-      font-weight: 300;
-      font-size: 1.4rem;
-      line-height: 1.2;
-      margin-bottom: 1rem;
-      color: var(--text);
-    }
-    .service-card p {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.75;
-    }
-    .service-tag {
-      display: inline-block;
-      margin-top: 1.5rem;
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      color: var(--accent);
-      border: 1px solid var(--accent);
-      padding: 0.2rem 0.6rem;
-    }
+    .service-card { display: flex; flex-direction: column; }
+    .service-card .fs-card-body { flex: 1; }
+    .service-card .fs-badge { align-self: flex-start; margin-top: var(--space-4); }
 
-    /* HOW IT WORKS */
-    .process {
-      padding: 5rem 2.5rem;
-      border-top: 1px solid var(--border);
-    }
+    /* How it works */
     .process-steps {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 3rem;
-      margin-top: 3rem;
+      gap: var(--space-6) var(--space-10);
+      list-style: none;
+      margin: 0; padding: 0;
     }
     .step-num {
-      font-size: 3rem;
-      font-family: var(--serif);
-      font-weight: 300;
-      color: var(--border);
-      line-height: 1;
-      margin-bottom: 1rem;
+      display: block;
+      font-family: var(--font-display);
+      font-size: 44px; line-height: 44px; font-weight: 700;
+      letter-spacing: 0.01em;
+      color: var(--ember-text);
+      margin-bottom: var(--space-2);
     }
-    .step h4 {
-      font-family: var(--mono);
-      font-size: 12px;
-      letter-spacing: 0.1em;
+    .step h3 {
+      font-family: var(--font-display);
+      font-size: 26px; line-height: 30px; font-weight: 700;
+      letter-spacing: 0.01em;
       text-transform: uppercase;
-      color: var(--text);
-      margin-bottom: 0.75rem;
+      color: var(--ink);
+      margin: 0 0 var(--space-2);
     }
-    .step p {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.75;
-    }
+    .step p { font-size: 15px; line-height: 22px; color: var(--ink-muted); }
 
-    /* PROOF */
-    .proof {
-      padding: 5rem 2.5rem;
-      border-top: 1px solid var(--border);
-    }
-    .proof-items {
+    /* Recent projects */
+    .proof-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      margin-top: 3rem;
+      gap: var(--space-4);
     }
-    .proof-item {
-      padding: 2rem;
-      border: 1px solid var(--border);
-      background: var(--surface);
+    .proof-card {
+      display: flex; flex-direction: column;
+      text-decoration: none; color: inherit;
     }
-    .proof-item h4 {
-      font-family: var(--serif);
-      font-weight: 300;
-      font-size: 1.1rem;
-      margin-bottom: 0.75rem;
-    }
-    .proof-item p {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.75;
-    }
+    .proof-icon { display: block; margin-bottom: var(--space-4); border-radius: var(--radius-icon); }
+    .proof-card .fs-card-body { flex: 1; }
     .proof-link {
-      display: inline-block;
-      margin-top: 1rem;
-      font-size: 11px;
-      color: var(--accent);
-      text-decoration: none;
-      letter-spacing: 0.06em;
+      margin-top: var(--space-4);
+      font-size: 13px; line-height: 18px; font-weight: 500;
+      color: var(--ember-text);
+      word-break: break-word;
     }
-    .proof-link:hover { text-decoration: underline; }
+    .proof-card:hover .proof-link { text-decoration: underline; }
 
-    /* CONTACT */
+    /* Contact */
     .contact {
-      padding: 5rem 2.5rem;
-      border-top: 1px solid var(--border);
+      padding: var(--space-10) var(--space-16) 0;
+      max-width: 1200px;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+      gap: var(--space-10);
       align-items: start;
     }
-    @media (max-width: 680px) { .contact { grid-template-columns: 1fr; } }
     .contact h2 {
-      font-family: var(--serif);
-      font-size: clamp(2rem, 4vw, 3.5rem);
-      font-weight: 300;
-      line-height: 1.1;
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 2.75rem);
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin: 0;
     }
-    .contact h2 em { font-style: italic; color: var(--accent); }
-    .contact-right p {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.8;
-      margin-bottom: 2rem;
-    }
-    .contact-email {
-      display: block;
-      font-size: 15px;
-      color: var(--accent);
-      text-decoration: none;
-      letter-spacing: 0.02em;
-      margin-bottom: 2rem;
-    }
-    .contact-email:hover { text-decoration: underline; }
-    .response-note {
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.06em;
-    }
+    .contact h2 em { font-style: normal; color: var(--ember-text); }
+    .contact-right p { font-size: 16px; line-height: 24px; color: var(--ink-muted); }
+    .contact-right .fs-btn { margin: var(--space-6) 0 var(--space-4); }
+    .contact-right .response-note { font-size: 13px; line-height: 18px; color: var(--ink-muted); }
 
-    /* FOOTER */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2rem 2.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.06em;
-    }
-    footer a { color: var(--muted); text-decoration: none; }
-    footer a:hover { color: var(--text); }
-
-    /* ANIMATIONS */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .hero-label { animation: fadeUp 0.5s ease both; }
-    .hero h1    { animation: fadeUp 0.6s ease 0.1s both; }
-    .hero-body  { animation: fadeUp 0.6s ease 0.2s both; }
-    .hero-cta   { animation: fadeUp 0.6s ease 0.3s both; }
-
-    /* RESPONSIVE */
-    @media (max-width: 680px) {
-      nav { padding: 1.25rem 1.5rem; }
-      .hero { padding: 4rem 1.5rem 3rem; }
-      .divider { margin: 0 1.5rem; }
-      .section { padding: 3.5rem 1.5rem; }
-      .process { padding: 3.5rem 1.5rem; }
-      .proof { padding: 3.5rem 1.5rem; }
-      footer { padding: 1.5rem; }
+    @media (max-width: 760px) {
+      .contact { padding: var(--space-6) var(--space-4) 0; grid-template-columns: 1fr; gap: var(--space-6); }
     }
   </style>
 </head>
 <body>
 
-  <nav>
-    <div class="nav-left">
-      <a class="nav-logo" href="https://forgesync.co.nz">Forge<span>Sync</span></a>
-      <a class="nav-cta" href="./index.html">Projects ↗</a>
+  <div id="top-sentinel" aria-hidden="true"></div>
+
+  <header class="fs-header">
+    <a class="fs-header-home" href="https://forgesync.co.nz">
+      <span class="fs-logo fs-logo-on-dark">
+        <img class="fs-mark" src="./brand/forgesync-mark-on-dark.svg" width="28" height="28" alt="" />
+        <span class="fs-wordmark" style="font-size: 22px;"><span class="fs-forge">Forge</span><span class="fs-sync">Sync</span></span>
+      </span>
+    </a>
+    <nav aria-label="Main">
+      <ul class="fs-nav">
+        <li><a class="fs-nav-link" href="./index.html">Projects</a></li>
+        <li><a class="fs-nav-link" href="./work-with-me.html" aria-current="page">Work with us</a></li>
+      </ul>
+    </nav>
+    <div class="fs-header-end">
+      <a class="fs-btn fs-btn-sm fs-btn-primary" href="mailto:contact@forgesync.co.nz">Get in touch</a>
     </div>
-  </nav>
+  </header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <p class="hero-label">Work with me</p>
-    <h1>From messy problem<br>to <em>working solution.</em></h1>
-    <p class="hero-body">
-      I analyse the process, build the tool or document, and hand over something your team can actually use — without needing three different contractors to get there.
-    </p>
-    <a class="hero-cta" href="mailto:contact@forgesync.co.nz">Get in touch →</a>
-  </section>
+  <main>
+    <section class="hero">
+      <p class="fs-eyebrow">Work with us</p>
+      <h1>We build it,<br /><em>then hand it over</em></h1>
+      <p class="hero-body">
+        Automation, integrations, custom web tools, and the documentation that goes with them. You get a written scope before any work starts, and something your team can run without us afterwards.
+      </p>
+      <a class="fs-btn fs-btn-md fs-btn-primary" href="mailto:contact@forgesync.co.nz">Get in touch</a>
+    </section>
 
-  <hr class="divider" />
+    <section class="section" aria-labelledby="services-heading">
+      <h2 class="fs-eyebrow" id="services-heading">What we do</h2>
+      <div class="services-grid">
 
-  <!-- SERVICES -->
-  <section class="section">
-    <p class="section-label">What I do</p>
-    <div class="services-grid">
+        <div class="fs-card service-card">
+          <p class="fs-eyebrow" aria-hidden="true">01</p>
+          <h3 class="fs-card-title">Process and documentation</h3>
+          <p class="fs-card-body">We map how the work actually happens, then write the SOPs and policy manuals people will follow. Useful when you are scaling, preparing for an audit, or handing critical knowledge to someone new.</p>
+          <span class="fs-badge">Deliverable</span>
+        </div>
 
-      <div class="service-card">
-        <p class="service-num">01</p>
-        <h3>Business Process & Documentation</h3>
-        <p>Mapping workflows, writing SOPs, and producing policy and procedures manuals that people actually follow. Useful when you're scaling, auditing, or handing off critical knowledge.</p>
-        <span class="service-tag">Deliverable</span>
+        <div class="fs-card service-card">
+          <p class="fs-eyebrow" aria-hidden="true">02</p>
+          <h3 class="fs-card-title">Web app development</h3>
+          <p class="fs-card-body">Custom tools built for one job — dashboards, trackers, calculators, utilities. Not template sites. Working software that solves the problem you have.</p>
+          <span class="fs-badge">Deliverable</span>
+        </div>
+
+        <div class="fs-card service-card">
+          <p class="fs-eyebrow" aria-hidden="true">03</p>
+          <h3 class="fs-card-title">Implementation guides</h3>
+          <p class="fs-card-body">End-user documentation, onboarding guides, training material and handover packs. Written for the people who will use the system, not the people who built it.</p>
+          <span class="fs-badge">Deliverable</span>
+        </div>
+
+        <div class="fs-card service-card">
+          <p class="fs-eyebrow" aria-hidden="true">04</p>
+          <h3 class="fs-card-title">Technical business analysis</h3>
+          <p class="fs-card-body">Requirements, user stories, acceptance criteria and stakeholder documentation. For teams that need a translator between the business and the engineers.</p>
+          <span class="fs-badge">Deliverable</span>
+        </div>
+
+        <div class="fs-card service-card">
+          <p class="fs-eyebrow" aria-hidden="true">05</p>
+          <h3 class="fs-card-title">Workflow automation</h3>
+          <p class="fs-card-body">We find the repetitive manual work and replace it — scripts, integrations and low-code flows, each documented so your team can maintain it without us.</p>
+          <span class="fs-badge">Deliverable</span>
+        </div>
+
       </div>
+    </section>
 
-      <div class="service-card">
-        <p class="service-num">02</p>
-        <h3>Web App Development</h3>
-        <p>Custom tools built for a specific job — dashboards, trackers, calculators, utilities. Not template sites. Functional software that solves the problem you actually have.</p>
-        <span class="service-tag">Deliverable</span>
+    <section class="section" aria-labelledby="process-heading">
+      <h2 class="fs-eyebrow" id="process-heading">How it works</h2>
+      <ol class="process-steps" role="list">
+        <li class="step">
+          <span class="step-num" aria-hidden="true">01</span>
+          <h3>Understand</h3>
+          <p>We talk through the problem and ask enough questions to understand what you need, not just what you asked for.</p>
+        </li>
+        <li class="step">
+          <span class="step-num" aria-hidden="true">02</span>
+          <h3>Scope</h3>
+          <p>You get a written scope: what is included, what is not, the timeline and the price. No surprises later.</p>
+        </li>
+        <li class="step">
+          <span class="step-num" aria-hidden="true">03</span>
+          <h3>Build</h3>
+          <p>We build it, and you get progress updates as we go. Revisions inside the agreed scope are included.</p>
+        </li>
+        <li class="step">
+          <span class="step-num" aria-hidden="true">04</span>
+          <h3>Hand over</h3>
+          <p>You get the finished thing — working software, complete documentation, or both — ready to use.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="section" aria-labelledby="proof-heading">
+      <h2 class="fs-eyebrow" id="proof-heading">Recent projects</h2>
+      <div class="proof-grid">
+
+        <a class="fs-card fs-card-interactive proof-card" href="https://weathertempo.forgesync.co.nz" target="_blank" rel="noopener noreferrer">
+          <img class="proof-icon" src="./brand/product-weathertempo.svg" width="56" height="56" alt="" />
+          <h3 class="fs-card-title">WeatherTempo</h3>
+          <p class="fs-card-body">Current conditions, tides, UV index, moon phase and a multi-day forecast on one screen.</p>
+          <span class="proof-link">weathertempo.forgesync.co.nz ↗</span>
+        </a>
+
+        <a class="fs-card fs-card-interactive proof-card" href="https://sun.forgesync.co.nz" target="_blank" rel="noopener noreferrer">
+          <img class="proof-icon" src="./brand/product-sunsmart.svg" width="56" height="56" alt="" />
+          <h3 class="fs-card-title">SunSmart UV</h3>
+          <p class="fs-card-body">UV monitoring for schools running a SunSmart policy. Tracks UV through the day and shows the action the policy requires.</p>
+          <span class="proof-link">sun.forgesync.co.nz ↗</span>
+        </a>
+
+        <a class="fs-card fs-card-interactive proof-card" href="https://netball.forgesync.co.nz" target="_blank" rel="noopener noreferrer">
+          <img class="proof-icon" src="./brand/product-courttime.svg" width="56" height="56" alt="" />
+          <h3 class="fs-card-title">CourtTime</h3>
+          <p class="fs-card-body">Netball court-time tracker for coaches. Rosters and substitution planning, so every player gets fair time on court.</p>
+          <span class="proof-link">netball.forgesync.co.nz ↗</span>
+        </a>
+
+        <a class="fs-card fs-card-interactive proof-card" href="./index.html">
+          <img class="proof-icon" src="./brand/forgesync-icon.svg" width="56" height="56" alt="" />
+          <h3 class="fs-card-title">The rest of them</h3>
+          <p class="fs-card-body">Six shipped tools in all, including a flight and satellite tracker, a time zone overlap checker and a URL sanitizer.</p>
+          <span class="proof-link">See all six projects →</span>
+        </a>
+
       </div>
+    </section>
 
-      <div class="service-card">
-        <p class="service-num">03</p>
-        <h3>Implementation Guides & Digital Content</h3>
-        <p>End-user documentation, onboarding guides, training materials, and system handover packs. Written for the people who will actually use them, not the people who built it.</p>
-        <span class="service-tag">Deliverable</span>
+    <section class="contact" aria-labelledby="contact-heading">
+      <div class="contact-left">
+        <h2 id="contact-heading">Tell us what<br /><em>you need built</em></h2>
       </div>
-
-      <div class="service-card">
-        <p class="service-num">04</p>
-        <h3>Technical Business Analysis</h3>
-        <p>Requirements gathering, user stories, acceptance criteria, and stakeholder documentation for teams that need a translator between business and engineering.</p>
-        <span class="service-tag">Deliverable</span>
+      <div class="contact-right">
+        <p>Describe the problem you are trying to solve. If it is a good fit, we will come back with a scope and a price. No obligation.</p>
+        <a class="fs-btn fs-btn-md fs-btn-primary" href="mailto:contact@forgesync.co.nz">contact@forgesync.co.nz</a>
+        <p class="response-note">Based in New Zealand · Available for remote engagements</p>
       </div>
+    </section>
+  </main>
 
-      <div class="service-card">
-        <p class="service-num">05</p>
-        <h3>Workflow Automation Consulting</h3>
-        <p>Identifying repetitive manual work and building automated alternatives — scripts, integrations, and no-code/low-code flows with clear documentation so your team can maintain it.</p>
-        <span class="service-tag">Deliverable</span>
-      </div>
-
+  <footer class="site-footer">
+    <span class="fs-logo fs-logo-on-dark">
+      <span class="fs-wordmark" style="font-size: 20px;"><span class="fs-forge">Forge</span><span class="fs-sync">Sync</span></span>
+    </span>
+    <div class="footer-links">
+      <a href="./index.html">Projects</a>
+      <a href="https://forgesync.co.nz">forgesync.co.nz ↗</a>
     </div>
-  </section>
-
-  <!-- HOW IT WORKS -->
-  <section class="process">
-    <p class="section-label">How it works</p>
-    <div class="process-steps">
-      <div class="step">
-        <div class="step-num">01</div>
-        <h4>Understand</h4>
-        <p>We talk through the problem. I ask enough questions to understand what you actually need, not just what you asked for.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">02</div>
-        <h4>Scope</h4>
-        <p>I send a written scope: what's included, what isn't, the timeline, and the price. No surprises later.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">03</div>
-        <h4>Build or document</h4>
-        <p>I get to work. You get progress updates. Revisions are included within the agreed scope.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">04</div>
-        <h4>Hand over</h4>
-        <p>You get the finished deliverable — working software, complete documentation, or both — ready to use.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROOF -->
-  <section class="proof">
-    <p class="section-label">Recent projects</p>
-    <div class="proof-items">
-
-      <div class="proof-item">
-        <h4>WeatherTempo</h4>
-        <p>Live weather dashboard showing current conditions, tides, UV index, moon phase, and multi-day forecast. Built for practical daily use.</p>
-        <a class="proof-link" href="https://weathertempo.forgesync.co.nz" target="_blank">weathertempo.forgesync.co.nz ↗</a>
-      </div>
-
-      <div class="proof-item">
-        <h4>SunSmart UV</h4>
-        <p>UV monitoring tool for schools with SunSmart policies. Tracks UV through the day and surfaces required actions based on policy type.</p>
-        <a class="proof-link" href="https://sun.forgesync.co.nz" target="_blank">sun.forgesync.co.nz ↗</a>
-      </div>
-
-      <div class="proof-item">
-        <h4>CourtTime</h4>
-        <p>Netball court-time tracker for coaches. Manages rosters and substitution planning to ensure fair game time across the squad.</p>
-        <a class="proof-link" href="https://netball.forgesync.co.nz" target="_blank">netball.forgesync.co.nz ↗</a>
-      </div>
-
-      <div class="proof-item">
-        <h4>More on the projects page</h4>
-        <p>Six shipped tools including a flight and satellite tracker, timezone overlap checker, and URL sanitizer.</p>
-        <a class="proof-link" href="./index.html">projects.forgesync.co.nz ↗</a>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section class="contact">
-    <div class="contact-left">
-      <h2>Got something<br><em>in mind?</em></h2>
-    </div>
-    <div class="contact-right">
-      <p>Describe the problem you're trying to solve. If it's a good fit, I'll come back with a scope and price. No obligation.</p>
-      <a class="contact-email" href="mailto:contact@forgesync.co.nz">contact@forgesync.co.nz</a>
-      <p class="response-note">Based in New Zealand · Available for remote engagements</p>
-    </div>
-  </section>
-
-  <footer>
-    <span>ForgeSync</span>
-    <a href="./index.html">Projects ↗</a>
   </footer>
+
+  <script>
+    // shadow-md on the sticky header once scrolled, per the elevation rules.
+    (function () {
+      var sentinel = document.getElementById('top-sentinel');
+      var header = document.querySelector('.fs-header');
+      if (!sentinel || !header || !('IntersectionObserver' in window)) return;
+      new IntersectionObserver(function (entries) {
+        header.classList.toggle('is-scrolled', !entries[0].isIntersecting);
+      }).observe(sentinel);
+    })();
+  </script>
 
 </body>
 </html>
