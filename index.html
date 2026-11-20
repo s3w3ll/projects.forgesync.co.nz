@@ -7,8 +7,7 @@
   <meta name="description" content="Six web tools built and shipped by ForgeSync — weather, tides, UV, time zones, netball court time and flight tracking. Each one built for a specific job." />
 
   <link rel="icon" href="./brand/forgesync-icon.svg" type="image/svg+xml" />
-  <meta name="theme-color" content="#15181C" media="(prefers-color-scheme: light)" />
-  <meta name="theme-color" content="#22272D" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#15181C" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -18,24 +17,14 @@
   <style>
     /* Page layout — projects */
 
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: var(--space-4);
-    }
-
-    .project-card {
-      display: flex; flex-direction: column;
-      overflow: hidden;
-      text-decoration: none;
-      color: inherit;
-    }
+    .project-card { display: flex; flex-direction: column; overflow: hidden; }
+    /* Full-bleed screenshot inside the padded card. */
     .project-thumb {
       margin: calc(var(--space-6) * -1) calc(var(--space-6) * -1) var(--space-6);
       aspect-ratio: 16 / 9;
       overflow: hidden;
       background: var(--surface-sunken);
-      border-bottom: 1px solid var(--line-strong);
+      border-bottom: 1px solid var(--line);
     }
     .project-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .project-card .fs-card-body { flex: 1; }
@@ -50,112 +39,115 @@
 </head>
 <body>
 
-  <div id="top-sentinel" aria-hidden="true"></div>
-
   <header class="fs-header">
-    <a class="fs-header-home" href="https://forgesync.co.nz">
-      <span class="fs-logo fs-logo-on-dark">
-        <img class="fs-mark" src="./brand/forgesync-mark-on-dark.svg" width="28" height="28" alt="" />
-        <span class="fs-wordmark" style="font-size: 22px;"><span class="fs-forge">Forge</span><span class="fs-sync">Sync</span></span>
-      </span>
-    </a>
-    <nav aria-label="Main">
-      <ul class="fs-nav">
-        <li><a class="fs-nav-link" href="./index.html" aria-current="page">Projects</a></li>
-        <li><a class="fs-nav-link" href="./work-with-me.html">Work with us</a></li>
-      </ul>
-    </nav>
-    <div class="fs-header-end">
-      <a class="fs-btn fs-btn-sm fs-btn-primary" href="mailto:contact@forgesync.co.nz">Get in touch</a>
+    <div class="container fs-header-inner">
+      <a class="fs-header-home" href="https://forgesync.co.nz">
+        <span class="fs-logo fs-logo-on-dark">
+          <img class="fs-mark" src="./brand/forgesync-mark-on-dark.svg" width="32" height="32" alt="" />
+          <span class="fs-wordmark" style="font-size: 24px;"><span class="fs-forge">Forge</span><span class="fs-sync">Sync</span></span>
+        </span>
+      </a>
+      <nav aria-label="Main">
+        <ul class="fs-nav">
+          <li><a class="fs-nav-link" href="https://forgesync.co.nz/#services">Services</a></li>
+          <li><a class="fs-nav-link" href="https://forgesync.co.nz/#about">About</a></li>
+          <li><a class="fs-nav-link" href="./index.html" aria-current="page">Projects</a></li>
+          <li><a class="fs-nav-link" href="./work-with-me.html">Work with us</a></li>
+        </ul>
+      </nav>
     </div>
   </header>
 
   <main>
     <section class="hero">
-      <p class="fs-eyebrow">Shipped work</p>
-      <h1>Six tools,<br /><em>built and shipped</em></h1>
-      <p class="hero-body">
-        Each one was built for a specific job — a coach picking substitutions, a school checking UV, someone working out when two offices are both awake. All six run in a browser. Here is what each does and where it lives.
-      </p>
+      <div class="container">
+        <h1>Six Tools, Built and Shipped</h1>
+        <p class="hero-body">
+          Each one was built for a specific job — a coach picking substitutions, a school checking UV, someone working out when two offices are both awake. All six run in a browser.
+        </p>
+        <div class="hero-actions">
+          <a class="fs-btn fs-btn-md fs-btn-primary" href="./work-with-me.html">Work with us</a>
+          <a class="fs-btn fs-btn-md fs-btn-secondary" href="mailto:contact@forgesync.co.nz">Get in touch</a>
+        </div>
+      </div>
     </section>
 
-    <section class="section" aria-labelledby="projects-heading">
-      <h2 class="fs-eyebrow" id="projects-heading">Projects</h2>
-      <div class="projects-grid">
+    <section class="section section-alt" id="projects" aria-labelledby="projects-heading">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="projects-heading">Projects</h2>
+          <p>Each one is live. Open a card to try it in a new tab.</p>
+        </div>
+        <div class="card-grid card-grid-3">
 
-        <a class="fs-card fs-card-interactive project-card" href="https://weathertempo.forgesync.co.nz/" target="_blank" rel="noopener noreferrer">
-          <div class="project-thumb"><img src="./thumbnails/weathertempo.jpg" alt="" /></div>
-          <p class="fs-eyebrow" aria-hidden="true">01</p>
-          <h3 class="fs-card-title">WeatherTempo</h3>
-          <p class="fs-card-body">Current conditions, tide times, UV index, moon phase and a multi-day forecast on one screen. Built for checking the day at a glance.</p>
-          <span class="project-link">weathertempo.forgesync.co.nz ↗</span>
-        </a>
+          <a class="fs-card fs-card-interactive project-card" href="https://weathertempo.forgesync.co.nz/" target="_blank" rel="noopener noreferrer">
+            <div class="project-thumb"><img src="./thumbnails/weathertempo.jpg" alt="" /></div>
+            <h3 class="fs-card-title">WeatherTempo</h3>
+            <p class="fs-card-body">Current conditions, tide times, UV index, moon phase and a multi-day forecast on one screen. Built for checking the day at a glance.</p>
+            <span class="project-link">weathertempo.forgesync.co.nz ↗</span>
+          </a>
 
-        <a class="fs-card fs-card-interactive project-card" href="https://timezone.forgesync.co.nz/" target="_blank" rel="noopener noreferrer">
-          <div class="project-thumb"><img src="./thumbnails/timezone.jpg" alt="" /></div>
-          <p class="fs-eyebrow" aria-hidden="true">02</p>
-          <h3 class="fs-card-title">Time Zone Overlap</h3>
-          <p class="fs-card-body">Pick two time zones and see where the working hours overlap. Saves doing the arithmetic before booking a call.</p>
-          <span class="project-link">timezone.forgesync.co.nz ↗</span>
-        </a>
+          <a class="fs-card fs-card-interactive project-card" href="https://timezone.forgesync.co.nz/" target="_blank" rel="noopener noreferrer">
+            <div class="project-thumb"><img src="./thumbnails/timezone.jpg" alt="" /></div>
+            <h3 class="fs-card-title">Time Zone Overlap</h3>
+            <p class="fs-card-body">Pick two time zones and see where the working hours overlap. Saves doing the arithmetic before booking a call.</p>
+            <span class="project-link">timezone.forgesync.co.nz ↗</span>
+          </a>
 
-        <a class="fs-card fs-card-interactive project-card" href="https://netball.forgesync.co.nz/" target="_blank" rel="noopener noreferrer">
-          <div class="project-thumb"><img src="./thumbnails/netball.jpg" alt="" /></div>
-          <p class="fs-eyebrow" aria-hidden="true">03</p>
-          <h3 class="fs-card-title">CourtTime</h3>
-          <p class="fs-card-body">Netball court-time tracker for coaches. Set the roster, plan substitutions by quarter, and see who is short of court time.</p>
-          <span class="project-link">netball.forgesync.co.nz ↗</span>
-        </a>
+          <a class="fs-card fs-card-interactive project-card" href="https://netball.forgesync.co.nz/" target="_blank" rel="noopener noreferrer">
+            <div class="project-thumb"><img src="./thumbnails/netball.jpg" alt="" /></div>
+            <h3 class="fs-card-title">CourtTime</h3>
+            <p class="fs-card-body">Netball court-time tracker for coaches. Set the roster, plan substitutions by quarter, and see who is short of court time.</p>
+            <span class="project-link">netball.forgesync.co.nz ↗</span>
+          </a>
 
-        <a class="fs-card fs-card-interactive project-card" href="https://unlink.forgesync.co.nz/" target="_blank" rel="noopener noreferrer">
-          <div class="project-thumb"><img src="./thumbnails/unlink.jpg" alt="" /></div>
-          <p class="fs-eyebrow" aria-hidden="true">04</p>
-          <h3 class="fs-card-title">LinkSanitizer</h3>
-          <p class="fs-card-body">Paste a link, get it back with the tracking parameters stripped. Turns a URL full of utm_ noise into something worth sharing.</p>
-          <span class="project-link">unlink.forgesync.co.nz ↗</span>
-        </a>
+          <a class="fs-card fs-card-interactive project-card" href="https://unlink.forgesync.co.nz/" target="_blank" rel="noopener noreferrer">
+            <div class="project-thumb"><img src="./thumbnails/unlink.jpg" alt="" /></div>
+            <h3 class="fs-card-title">LinkSanitizer</h3>
+            <p class="fs-card-body">Paste a link, get it back with the tracking parameters stripped. Turns a URL full of utm_ noise into something worth sharing.</p>
+            <span class="project-link">unlink.forgesync.co.nz ↗</span>
+          </a>
 
-        <a class="fs-card fs-card-interactive project-card" href="https://isthatabird.forgesync.co.nz/" target="_blank" rel="noopener noreferrer">
-          <div class="project-thumb"><img src="./thumbnails/isthatabird.jpg" alt="" /></div>
-          <p class="fs-eyebrow" aria-hidden="true">05</p>
-          <h3 class="fs-card-title">Up in the Air</h3>
-          <p class="fs-card-body">Real-time tracker for aircraft and satellites overhead. Shows what is above your location right now, from airliners to spacecraft.</p>
-          <span class="project-link">isthatabird.forgesync.co.nz ↗</span>
-        </a>
+          <a class="fs-card fs-card-interactive project-card" href="https://isthatabird.forgesync.co.nz/" target="_blank" rel="noopener noreferrer">
+            <div class="project-thumb"><img src="./thumbnails/isthatabird.jpg" alt="" /></div>
+            <h3 class="fs-card-title">Up in the Air</h3>
+            <p class="fs-card-body">Real-time tracker for aircraft and satellites overhead. Shows what is above your location right now, from airliners to spacecraft.</p>
+            <span class="project-link">isthatabird.forgesync.co.nz ↗</span>
+          </a>
 
-        <a class="fs-card fs-card-interactive project-card" href="https://sun.forgesync.co.nz/" target="_blank" rel="noopener noreferrer">
-          <div class="project-thumb"><img src="./thumbnails/sun.jpg" alt="" /></div>
-          <p class="fs-eyebrow" aria-hidden="true">06</p>
-          <h3 class="fs-card-title">SunSmart UV</h3>
-          <p class="fs-card-body">UV monitoring for schools running a SunSmart policy. Tracks UV through the day and shows the action the policy requires.</p>
-          <span class="project-link">sun.forgesync.co.nz ↗</span>
-        </a>
+          <a class="fs-card fs-card-interactive project-card" href="https://sun.forgesync.co.nz/" target="_blank" rel="noopener noreferrer">
+            <div class="project-thumb"><img src="./thumbnails/sun.jpg" alt="" /></div>
+            <h3 class="fs-card-title">SunSmart UV</h3>
+            <p class="fs-card-body">UV monitoring for schools running a SunSmart policy. Tracks UV through the day and shows the action the policy requires.</p>
+            <span class="project-link">sun.forgesync.co.nz ↗</span>
+          </a>
 
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <span class="fs-logo fs-logo-on-dark">
-      <span class="fs-wordmark" style="font-size: 20px;"><span class="fs-forge">Forge</span><span class="fs-sync">Sync</span></span>
-    </span>
-    <div class="footer-links">
-      <a href="./work-with-me.html">Work with us</a>
-      <a href="https://forgesync.co.nz">forgesync.co.nz ↗</a>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <span class="fs-logo fs-logo-on-dark">
+            <img class="fs-mark" src="./brand/forgesync-mark-on-dark.svg" width="30" height="30" alt="" />
+            <span class="fs-wordmark" style="font-size: 22px;"><span class="fs-forge">Forge</span><span class="fs-sync">Sync</span></span>
+          </span>
+          <p class="footer-tagline">Streamlining operations for a brighter future.</p>
+        </div>
+        <nav aria-labelledby="footer-elsewhere">
+          <p class="fs-eyebrow footer-heading" id="footer-elsewhere">Elsewhere</p>
+          <div class="footer-links">
+            <a href="https://forgesync.co.nz">forgesync.co.nz</a>
+            <a href="mailto:contact@forgesync.co.nz">contact@forgesync.co.nz</a>
+          </div>
+        </nav>
+      </div>
+      <p class="footer-legal">© 2026 ForgeSync. All rights reserved.</p>
     </div>
   </footer>
-
-  <script>
-    // shadow-md on the sticky header once scrolled, per the elevation rules.
-    (function () {
-      var sentinel = document.getElementById('top-sentinel');
-      var header = document.querySelector('.fs-header');
-      if (!sentinel || !header || !('IntersectionObserver' in window)) return;
-      new IntersectionObserver(function (entries) {
-        header.classList.toggle('is-scrolled', !entries[0].isIntersecting);
-      }).observe(sentinel);
-    })();
-  </script>
 
 </body>
 </html>

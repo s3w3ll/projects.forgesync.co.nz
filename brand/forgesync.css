@@ -1,59 +1,61 @@
 /* ==========================================================================
-   ForgeSync design system
+   ForgeSync design system — projects.forgesync.co.nz
    Tokens from project/tokens.json (v1); components are the subset of
    project/components/bundle.css this site uses, with the `fs-` class names
    kept so the React bundle can be swapped in later.
 
+   Layout matches forgesync.co.nz: a centred 1400px container, a centred hero,
+   centred section headings on alternating grounds, and the same header and
+   footer. Light theme only, like the main site, so the two never disagree.
+
    Load the typefaces alongside this file:
    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet" />
 
-   Three things here are site-level additions rather than system tokens; each
-   is commented where it appears:
-     --line-strong         a card edge that clears 3:1 (the system's `line` is
-                           documented as decorative, never a control boundary)
+   Site-level additions rather than system tokens, each commented in place:
+     --line-strong         a card edge that clears 3:1 for cards that are links
      --shadow-focus-panel  a focus ring whose gap matches a `panel` ground
      the current-page bar  drawn with ::after, not box-shadow
    ========================================================================== */
 
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
 
-  /* Colour — Light theme */
+  /* Colour */
   --surface:        #F7F7F8;  /* page ground (Snow) */
-  --surface-raised: #FFFFFF;  /* cards, panels and inputs on surface */
-  --surface-sunken: #ECEEF0;  /* Mist: wells, quiet panels */
+  --surface-raised: #FFFFFF;  /* cards and panels on surface */
+  --surface-sunken: #ECEEF0;  /* Mist: alternate section bands */
   --panel:          #15181C;  /* dark bands: site header, footer */
   --ink:            #15181C;  /* primary text */
   --ink-muted:      #5B636D;  /* Slate: secondary text, captions, labels */
   --line:           #DADDE1;  /* hairline dividers — decorative only */
   --ember-text:     #B8460F;  /* links, primary buttons, accent text */
   --on-accent:      #FFFFFF;  /* text on an ember-text fill */
-  --danger:         #B3261E;
-
-  /* The system's `line` is explicitly "decorative only, never the sole
-     boundary of a control". The project cards are links, so their edge IS a
-     control boundary and needs 3:1 (WCAG 1.4.11); `line` measures 1.2:1 here.
-     Used only on interactive cards, so quiet dividers keep the house hairline. */
-  --line-strong:    #868D95;  /* 3.14:1 on surface */
-
-  /* Colour — the same in every theme */
-  --steel:          #15181C;  /* the icon tile behind the mark */
-  --snow:           #F2F4F6;  /* the mark's lower bars on steel or panel */
+  --steel:          #15181C;
+  --snow:           #F2F4F6;
   --ember:          #F0641E;  /* the top ingot; accents on dark grounds */
-  --spark:          #FFB238;  /* one hot highlight per view */
   --on-panel:       #F2F4F6;
   --on-panel-muted: #A3ABB5;
+  --line-on-panel:  #2C3238;  /* divider inside the footer */
+
+  /* The system's `line` is "decorative only, never the sole boundary of a
+     control". Cards that are links need an edge that clears 3:1 (WCAG 1.4.11);
+     `line` measures 1.2:1. Informational cards keep the house hairline.
+     Calibrated against the darker of the two grounds cards sit on. */
+  --line-strong:    #7F868E;  /* 3.17:1 on surface-sunken, 3.44:1 on surface */
 
   /* Type */
   --font-display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif;
   --font-sans:    "Barlow", system-ui, sans-serif;
 
-  /* Spacing */
+  /* Spacing. 8 and 12 are not system tokens: they are the grid gap and
+     section rhythm forgesync.co.nz uses, kept here so the sites line up. */
   --space-1:  4px;
   --space-2:  8px;
   --space-4:  16px;
   --space-6:  24px;
+  --space-8:  32px;
   --space-10: 40px;
+  --space-12: 48px;
   --space-16: 64px;
 
   /* Radius — near-square, like cut stock */
@@ -62,40 +64,15 @@
   --radius-lg:   10px;
   --radius-icon: 22%;
 
-  /* Elevation — Light. Crisp and low, tinted steel rather than black. */
+  /* Elevation — crisp and low, tinted steel rather than black */
   --shadow-sm:    0 1px 2px rgba(21,24,28,0.08), 0 1px 1px rgba(21,24,28,0.06);
   --shadow-md:    0 4px 10px -2px rgba(21,24,28,0.12), 0 2px 4px -2px rgba(21,24,28,0.08);
-  --shadow-lg:    0 12px 24px -6px rgba(21,24,28,0.18), 0 4px 8px -4px rgba(21,24,28,0.10);
   --shadow-inset: inset 0 1px 2px rgba(21,24,28,0.08);
   --shadow-focus: 0 0 0 2px #F7F7F8, 0 0 0 4px #B8460F;
 
-  /* The shadow-focus token bakes in the `surface` ground, so a control on a
-     `panel` ground needs its own: a 2px gap in the panel colour, then the
-     ember ring. Ember rather than ember-text, which is the light-ground accent. */
+  /* shadow-focus bakes in the `surface` ground, so a control on the `panel`
+     band needs its own: a 2px gap in the panel colour, then the ember ring. */
   --shadow-focus-panel: 0 0 0 2px var(--panel), 0 0 0 4px var(--ember);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --surface:        #0F1215;
-    --surface-raised: #1B1F24;
-    --surface-sunken: #0A0C0E;
-    --panel:          #22272D;  /* lifts so the band stays visible */
-    --ink:            #F2F4F6;
-    --ink-muted:      #A3ABB5;
-    --line:           #2C3238;
-    --line-strong:    #5C646C;  /* 3.13:1 on surface */
-    --ember-text:     #F0641E;
-    --on-accent:      #15181C;
-    --danger:         #F2867D;
-
-    /* In dark mode elevation comes mainly from surface-raised. */
-    --shadow-sm:    0 1px 2px rgba(0,0,0,0.40);
-    --shadow-md:    0 4px 12px -2px rgba(0,0,0,0.50);
-    --shadow-lg:    0 12px 28px -6px rgba(0,0,0,0.60), 0 0 0 1px rgba(242,244,246,0.06);
-    --shadow-inset: inset 0 1px 2px rgba(0,0,0,0.45);
-    --shadow-focus: 0 0 0 2px #0F1215, 0 0 0 4px #F0641E;
-  }
 }
 
 /* ==========================================================================
@@ -107,7 +84,6 @@
 html { scroll-behavior: smooth; }
 
 body {
-  margin: 0;
   font-family: var(--font-sans);
   font-variant-numeric: tabular-nums;
   background: var(--surface);
@@ -117,12 +93,20 @@ body {
   min-height: 100vh;
 }
 
+/* The centred column every band sits in, matching forgesync.co.nz. */
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+
 /* ==========================================================================
    Mark and logo
    ========================================================================== */
 
 .fs-mark { display: block; flex-shrink: 0; }
-.fs-logo { display: inline-flex; align-items: center; gap: 0.26em; line-height: 1; color: var(--ink); }
+.fs-logo { display: inline-flex; align-items: center; gap: 6px; line-height: 1; color: var(--ink); }
 .fs-logo-on-dark { color: var(--on-panel); }
 /* FORGE 700 and SYNC 400 in ONE colour: the weight change does the splitting,
    and ember stays in the mark. No space between the two words. */
@@ -153,8 +137,8 @@ body {
   cursor: pointer; text-decoration: none;
   transition: box-shadow 120ms ease, background-color 120ms ease, filter 120ms ease;
 }
-.fs-btn-md { height: 44px; padding: 0 var(--space-6); font-size: 17px; }
-.fs-btn-sm { height: 36px; padding: 0 var(--space-4); font-size: 15px; border-radius: var(--radius-sm); }
+.fs-btn-md { height: 44px; padding: 0 var(--space-8); font-size: 17px; }
+.fs-btn-sm { height: 44px; padding: 0 var(--space-2); font-size: 15px; border-radius: var(--radius-sm); }
 .fs-btn-primary { background: var(--ember-text); color: var(--on-accent); }
 .fs-btn-primary:hover { filter: brightness(1.08); box-shadow: var(--shadow-sm); }
 .fs-btn-secondary { background: var(--surface-raised); color: var(--ink); border-color: var(--ink-muted); box-shadow: var(--shadow-sm); }
@@ -162,24 +146,6 @@ body {
 .fs-btn-ghost { background: transparent; color: var(--ember-text); }
 .fs-btn-ghost:hover { background: var(--surface-sunken); }
 .fs-btn:active { box-shadow: var(--shadow-inset); filter: none; }
-
-/* ==========================================================================
-   Badge
-   ========================================================================== */
-
-.fs-badge {
-  display: inline-flex; align-items: center; gap: 6px;
-  height: 24px; padding: 0 8px;
-  border-radius: var(--radius-sm);
-  font-family: var(--font-display);
-  font-size: 14px; font-weight: 600;
-  letter-spacing: 0.06em; text-transform: uppercase;
-  border: 1px solid var(--line);
-  background: var(--surface-raised);
-  color: var(--ink-muted);
-  white-space: nowrap;
-}
-.fs-badge-ember { border-color: var(--ember-text); color: var(--ember-text); }
 
 /* ==========================================================================
    Card
@@ -191,30 +157,40 @@ body {
   border-radius: var(--radius-lg);
   padding: var(--space-6);
   box-shadow: var(--shadow-sm);
+  text-align: center;
   transition: box-shadow 160ms ease;
 }
 /* An interactive card is a control, so its edge carries the 3:1 boundary the
    decorative hairline cannot. */
-.fs-card-interactive { border-color: var(--line-strong); }
+.fs-card-interactive { border-color: var(--line-strong); text-decoration: none; color: inherit; }
 .fs-card-interactive:hover { box-shadow: var(--shadow-md); }
+.fs-card-title {
+  font-family: var(--font-display);
+  font-size: 20px; line-height: 28px; font-weight: 700;
+  color: var(--ink);
+}
+.fs-card-body {
+  margin-top: var(--space-4);
+  font-size: 14px; line-height: 20px;
+  color: var(--ink-muted);
+}
 .fs-eyebrow {
-  margin: 0 0 var(--space-2);
   font-family: var(--font-display);
   font-size: 14px; line-height: 16px; font-weight: 600;
   letter-spacing: 0.1em; text-transform: uppercase;
   color: var(--ink-muted);
 }
-.fs-card-title {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: 26px; line-height: 30px; font-weight: 700;
-  letter-spacing: 0.01em;
-  color: var(--ink);
+
+/* A centred, wrapping grid: a short last row sits in the middle, as every
+   row does on forgesync.co.nz, instead of hugging the left edge. */
+.card-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-8); }
+.card-grid > * { flex: 0 0 100%; min-width: 0; }
+@media (min-width: 640px) {
+  .card-grid > * { flex-basis: calc((100% - var(--space-8)) / 2); }
 }
-.fs-card-body {
-  margin-top: var(--space-2);
-  font-size: 15px; line-height: 22px;
-  color: var(--ink-muted);
+@media (min-width: 1024px) {
+  .card-grid-3 > * { flex-basis: calc((100% - 2 * var(--space-8)) / 3); }
+  .card-grid-4 > * { flex-basis: calc((100% - 3 * var(--space-8)) / 4); }
 }
 
 /* ==========================================================================
@@ -222,15 +198,16 @@ body {
    ========================================================================== */
 
 .fs-header {
-  display: flex; flex-wrap: wrap; align-items: center;
-  gap: var(--space-4) var(--space-6);
-  padding: 12px var(--space-16);
+  position: sticky; top: 0; z-index: 100;
   background: var(--panel);
   color: var(--on-panel);
-  position: sticky; top: 0; z-index: 100;
-  transition: box-shadow 160ms ease;
+  box-shadow: var(--shadow-sm);
 }
-.fs-header.is-scrolled { box-shadow: var(--shadow-md); }
+.fs-header-inner {
+  display: flex; flex-wrap: wrap; align-items: center;
+  column-gap: var(--space-6);
+  min-height: 80px;
+}
 .fs-header-home {
   display: inline-flex;
   border-radius: var(--radius-sm);
@@ -239,7 +216,7 @@ body {
   padding: 4px; margin: -4px;
 }
 .fs-header nav { margin-left: auto; }
-.fs-nav { display: flex; flex-wrap: wrap; gap: var(--space-1); list-style: none; margin: 0; padding: 0; }
+.fs-nav { display: flex; flex-wrap: wrap; gap: var(--space-1); list-style: none; }
 .fs-nav-link {
   display: inline-flex; align-items: center;
   position: relative;
@@ -262,35 +239,95 @@ body {
   height: 3px;
   background: var(--ember);
 }
-.fs-header-end { display: flex; gap: var(--space-2); }
 
-/* On-panel adaptation. `ember-text` is the accent for light grounds; on a panel
-   ground the accent is `ember`, with `steel` carrying the text. */
-.fs-header .fs-btn-primary { background: var(--ember); color: var(--steel); }
+/* ==========================================================================
+   Page bands: hero and sections
+   ========================================================================== */
+
+.hero { padding-block: 88px; text-align: center; }
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 1rem + 4vw, 4.5rem);
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+}
+.hero-body {
+  max-width: 768px;
+  margin: var(--space-6) auto 0;
+  font-size: 20px; line-height: 28px;
+  color: var(--ink-muted);
+}
+.hero-actions {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+.hero-more { margin-top: var(--space-6); }
+
+.hero h1, .hero-body, .hero-actions, .hero-more { animation: fadeUp 0.6s ease both; }
+.hero-body    { animation-delay: 0.08s; }
+.hero-actions { animation-delay: 0.16s; }
+.hero-more    { animation-delay: 0.24s; }
+
+.section { padding-block: var(--space-16); }
+.section-alt { background: var(--surface-sunken); }
+.section-head {
+  max-width: 768px;
+  margin: 0 auto var(--space-12);
+  text-align: center;
+}
+.section-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.875rem, 1rem + 2.5vw, 3rem);
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+}
+.section-head p {
+  margin-top: var(--space-4);
+  font-size: 20px; line-height: 28px;
+  color: var(--ink-muted);
+}
 
 /* ==========================================================================
    Site footer
    ========================================================================== */
 
-.site-footer {
-  margin-top: var(--space-10);
-  padding: var(--space-6) var(--space-16);
-  background: var(--panel);
-  color: var(--on-panel);
-  display: flex; flex-wrap: wrap; align-items: center;
-  justify-content: space-between; gap: var(--space-4);
+.site-footer { background: var(--panel); color: var(--on-panel); }
+.site-footer .container { padding-block: var(--space-12); }
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-8);
 }
-.footer-links { display: flex; flex-wrap: wrap; gap: var(--space-2); }
-.site-footer a {
+.footer-tagline {
+  margin-top: var(--space-4);
+  max-width: 320px;
+  font-size: 14px; line-height: 20px;
+  color: var(--on-panel-muted);
+}
+.footer-heading { color: var(--on-panel-muted); margin-bottom: var(--space-2); }
+.footer-links { display: flex; flex-direction: column; align-items: flex-start; }
+.footer-links a {
   display: inline-flex; align-items: center;
-  min-height: 44px; padding: 0 12px;
+  min-height: 44px;
   border-radius: var(--radius-sm);
-  color: var(--on-panel-muted); text-decoration: none;
-  font-family: var(--font-display);
-  font-size: 17px; font-weight: 600;
-  letter-spacing: 0.05em; text-transform: uppercase;
+  font-size: 15px;
+  color: var(--on-panel);
+  text-decoration: none;
 }
-.site-footer a:hover { color: var(--on-panel); }
+.footer-links a:hover { text-decoration: underline; }
+.footer-legal {
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--line-on-panel);
+  text-align: center;
+  font-size: 14px; line-height: 20px;
+  color: var(--on-panel-muted);
+}
 
 /* ==========================================================================
    Focus — on every control, never removed, never colour alone
@@ -307,7 +344,6 @@ a:focus-visible {
      a focus indicator has to be there the instant focus lands. */
   transition: none;
 }
-.fs-header .fs-btn:focus-visible,
 .fs-header .fs-nav-link:focus-visible,
 .fs-header .fs-header-home:focus-visible,
 .site-footer a:focus-visible {
@@ -315,9 +351,6 @@ a:focus-visible {
   box-shadow: var(--shadow-focus-panel);
   transition: none;
 }
-
-/* Sticky-header scroll sentinel */
-#top-sentinel { position: absolute; top: 0; left: 0; width: 1px; height: 1px; }
 
 /* ==========================================================================
    Motion
@@ -334,45 +367,25 @@ a:focus-visible {
 }
 
 /* ==========================================================================
-   Shared page layout
-   Both pages use these, so they live here rather than being copied into each
-   page's <style> block, where they would drift apart.
+   Phones — matches forgesync.co.nz below 768px
    ========================================================================== */
 
-.hero { padding: var(--space-10) var(--space-16) var(--space-6); max-width: 900px; }
-.hero h1 {
-  font-family: var(--font-display);
-  font-size: clamp(2.75rem, 7vw, 4rem);
-  line-height: 0.95;
-  font-weight: 700;
-  letter-spacing: 0.01em;
-  text-transform: uppercase;
-  color: var(--ink);
-  margin: 0 0 var(--space-6);
-}
-/* Barlow Condensed carries emphasis by colour, not slant. */
-.hero h1 em { font-style: normal; color: var(--ember-text); }
-.hero-body { font-size: 16px; line-height: 24px; color: var(--ink-muted); max-width: 580px; }
+@media (max-width: 767px) {
+  .container { padding-inline: var(--space-4); }
 
-.hero .fs-eyebrow { animation: fadeUp 0.5s ease both; }
-.hero h1          { animation: fadeUp 0.6s ease 0.08s both; }
-.hero-body        { animation: fadeUp 0.6s ease 0.16s both; }
-.hero .fs-btn     { animation: fadeUp 0.6s ease 0.24s both; }
+  /* Logo on its own row, the nav beneath it, still sticky: two rows of about
+     94px, the same as the main site. The nav's negative margin lines the link
+     text up with the container edge rather than the links' padding. */
+  .fs-header-inner { min-height: 0; padding-block: 10px 6px; row-gap: 2px; }
+  .fs-header-home  { flex: 1 1 100%; }
+  .fs-header nav   { margin-left: -12px; }
+  /* Tighter link padding, as the main site uses here, keeps all four links on
+     one row at 375px; at 12px the last one wraps to a third row. */
+  .fs-nav-link     { padding: 0 8px; }
 
-.section { padding: var(--space-10) var(--space-16) 0; max-width: 1200px; }
+  .hero { padding-block: var(--space-16); }
+  .hero h1 { line-height: 1.1; }
+  .hero-body, .section-head p { font-size: 18px; }
 
-/* ==========================================================================
-   Page margins
-   ========================================================================== */
-
-@media (max-width: 760px) {
-  /* The header needs up to three rows at phone widths; sticking it there
-     would hold a fifth of the viewport permanently, so it scrolls away. */
-  .fs-header      { padding: 12px var(--space-4); row-gap: var(--space-2); position: static; }
-  .fs-header-home { flex: 1 1 100%; }
-  .fs-header nav  { margin-left: 0; }
-  .fs-header-end  { margin-left: auto; }
-  .site-footer    { padding: var(--space-4); }
-  .hero           { padding: var(--space-6) var(--space-4) var(--space-4); }
-  .section        { padding: var(--space-6) var(--space-4) 0; }
+  .footer-grid { grid-template-columns: 1fr; }
 }
